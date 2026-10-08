@@ -1,0 +1,7 @@
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+*.log
+
+# Agent internal task-tracking (not part of the course)
+.agents/

@@ -38,25 +38,14 @@ The modules build on each other. Early modules establish the **lineage** and the
 
 | # | Module | Theme |
 |---|--------|-------|
-| 1 | [Origins & Lineage](./docs/modules/module-01-lineage.md) | Where RxJS comes from: set theory → Haskell → LINQ → Rx.NET → RxJS |
-| 2 | [Operators as Domain-Invariant Algebra](./docs/modules/module-02-domain-invariance.md) | The domain changes, the operators do not |
-| 3 | [The Operator Algebra](./docs/modules/module-03-operator-algebra.md) | Observables + operators + laws, operator by operator |
-| 4 | [Time Algebra](./docs/modules/module-04-time-algebra.md) | Generate, shift, and sample across the time axis |
-| 5 | [Operators as Mealy Machines](./docs/modules/module-05-mealy-machines.md) | Every operator is a state machine |
-| 6 | [Schedulers as the Clock](./docs/modules/module-06-schedulers.md) | Who decides *when* work runs |
-| 7 | [Subjects: the Fork in the Dataflow](./docs/modules/module-07-subjects.md) | Observer + Observable, the multicast hinge |
-| 8 | [Multicasting = Subject + Lifecycle](./docs/modules/module-08-multicasting.md) | Every multicast operator is a Subject plus a lifecycle policy |
-
-## Running the docs site
-
-This repo doubles as a [VitePress](https://vitepress.dev) documentation site. The 8 modules live under `docs/modules/`. Requires **Node 18+**.
-
-```bash
-npm install          # install VitePress (needs npm-registry access)
-npm run docs:dev     # start the local dev server (http://localhost:5173)
-npm run docs:build   # build the static site into docs/.vitepress/dist/
-npm run docs:preview # preview the built site locally
-```
+| 1 | [Origins & Lineage](/modules/module-01-lineage) | Where RxJS comes from: set theory → Haskell → LINQ → Rx.NET → RxJS |
+| 2 | [Operators as Domain-Invariant Algebra](/modules/module-02-domain-invariance) | The domain changes, the operators do not |
+| 3 | [The Operator Algebra](/modules/module-03-operator-algebra) | Observables + operators + laws, operator by operator |
+| 4 | [Time Algebra](/modules/module-04-time-algebra) | Generate, shift, and sample across the time axis |
+| 5 | [Operators as Mealy Machines](/modules/module-05-mealy-machines) | Every operator is a state machine |
+| 6 | [Schedulers as the Clock](/modules/module-06-schedulers) | Who decides *when* work runs |
+| 7 | [Subjects: the Fork in the Dataflow](/modules/module-07-subjects) | Observer + Observable, the multicast hinge |
+| 8 | [Multicasting = Subject + Lifecycle](/modules/module-08-multicasting) | Every multicast operator is a Subject plus a lifecycle policy |
 
 ## Credits
 
