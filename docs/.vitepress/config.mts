@@ -5,6 +5,11 @@ export default defineConfig({
   title: 'RxJS Deep Dive',
   description:
     'RxJS as a coherent algebra over streams: lineage, laws, time, Mealy machines, schedulers, subjects, and multicasting.',
+  // Base public path. '/' is correct for a custom domain (e.g. netxpert.ch or a
+  // subdomain) and for the user/org Pages root. If you instead deploy to the
+  // default project Pages URL (https://hansschenker.github.io/rxjs-deep-dive-kiro/),
+  // change this to '/rxjs-deep-dive-kiro/'.
+  base: '/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
