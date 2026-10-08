@@ -47,6 +47,10 @@ The modules build on each other. Early modules establish the **lineage** and the
 | 7 | [Subjects: the Fork in the Dataflow](./module-07-subjects.md) | Observer + Observable, the multicast hinge |
 | 8 | [Multicasting = Subject + Lifecycle](./module-08-multicasting.md) | Every multicast operator is a Subject plus a lifecycle policy |
 
+## Credits
+
+The main contributor to this project is Kiro, which authored the course content across a collaborative deep-dive session.
+
 ## The one idea
 
 If you remember nothing else: **RxJS is an algebra**. Observables are the values, operators are the operations, and a small set of laws governs how they compose. The domain (clicks, HTTP, sensors, stock ticks) is irrelevant to the algebra, exactly as ordinary algebra does not care whether `x` counts apples or electrons.
