@@ -160,12 +160,17 @@ liveFeed$.pipe(takeUntil(timer(10000))); // auto-stop after 10 seconds
 ## Step 8: Time algebra laws
 
 ```
-Additivity:        delay(a) then delay(b)        ≡  delay(a + b)
-Distributivity:    delay(d)(merge(x, y))          ≡  merge(delay(d)(x), delay(d)(y))
+Additivity:        delay(a) then delay(b)        ≡  delay(a + b)          ✅ verified
+Distributivity:    delay(d)(merge(x, y))          ≡  merge(delay(d)(x), delay(d)(y))  ✅ verified
 Near-identity:     delay(0)                        ≈  identity   (but it RESCHEDULES - see note)
 Debounce absorbs:  debounceTime(a) then debounceTime(b)  behaves like the dominant (max) window
 Throttle:          throttleTime is idempotent-ish - re-throttling a throttled stream rarely changes it
 ```
+
+> ✅ **Verified** against `rxjs@7.8.2`: the **additivity** and **distributivity** laws
+> (the two marked above) are proven by marble tests in
+> [`examples/src/module-04-time-algebra/time-operators.test.ts`](https://github.com/hansschenker/rxjs-deep-dive-kiro/blob/main/examples/src/module-04-time-algebra/time-operators.test.ts).
+> The debounce-absorption and throttle-idempotence claims remain unverified.
 
 > **`delay(0)` is not a true identity.** It reschedules emissions onto a (default async) scheduler, so synchronous ordering can change even though values and timings *look* unchanged. This is the first hint that **a scheduler sits underneath every timed operator** (Module 6).
 
@@ -186,9 +191,11 @@ const scheduler = new TestScheduler((actual, expected) => {
 
 scheduler.run(({ cold, expectObservable }) => {
   const source$ = cold('--a--b--c|');
-  const result$ = source$.pipe(debounceTime(30));
-  //  marbles describe emissions at virtual frames; no real waiting happens
-  expectObservable(result$).toBe('-----------(c|)'); // illustrative - verify timing
+  const result$ = source$.pipe(debounceTime(3));
+  //  marbles describe emissions at virtual frames; no real waiting happens.
+  //  a and b are each interrupted within 3 frames; only c survives, flushed with
+  //  the completion at frame 9.
+  expectObservable(result$).toBe('---------(c|)'); // ✅ verified vs rxjs@7.8.2
 });
 ```
 

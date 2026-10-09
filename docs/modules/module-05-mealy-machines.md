@@ -194,6 +194,11 @@ Each incoming symbol flows through `M1`, whose output feeds `M2`, whose output f
 - **Cancellation semantics.** `switchMap`'s "cancel previous" is just its `δ` calling `unsubscribe` - the semantics fall out of the transition function, not from special-case documentation.
 - **Testability.** A machine with explicit states and transitions is directly expressible as a table-driven test.
 
+> ✅ **Verified** against `rxjs@7.8.2`: the worked traces (`scan`, `distinctUntilChanged`,
+> `take`) and the `|Q|`-classification consequences (`take` terminates even on an infinite
+> source; `toArray` never emits on one) are asserted in
+> [`examples/src/module-05-mealy-machines/machine-traces.test.ts`](https://github.com/hansschenker/rxjs-deep-dive-kiro/blob/main/examples/src/module-05-mealy-machines/machine-traces.test.ts).
+
 ---
 
 ## Key takeaway

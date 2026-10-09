@@ -1,0 +1,48 @@
+name: Examples CI (law verification)
+
+# Runs the runnable examples' marble-test suite + type-check. This is the gate
+# that keeps the course's algebraic-law claims honest against the pinned RxJS
+# version — if a documented law or marble timing stops holding, CI goes red.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'examples/**'
+      - '.github/workflows/examples-ci.yml'
+  pull_request:
+    paths:
+      - 'examples/**'
+      - '.github/workflows/examples-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Verify across the Node versions the examples support (engines: >=18).
+        node-version: [18, 20, 22]
+    defaults:
+      run:
+        working-directory: examples
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: examples/package-lock.json
+
+      - name: Install dependencies (reproducible)
+        run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Run the law-verification suite
+        run: npm test

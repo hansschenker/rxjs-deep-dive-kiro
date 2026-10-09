@@ -193,7 +193,12 @@ source$.pipe(mergeMap(fetchItem, 1));   // ≡ concatMap(fetchItem)   (one at a 
    └───┴───┴───┘              └───┴───┴───┘
 ```
 
-> ⚠️ Verify `mergeMap(f, 1) ≡ concatMap(f)` and the exact semantics of `observeOn`/`subscribeOn` against rxjs.dev for your version.
+> ✅ **Verified** against `rxjs@7.8.2`: `mergeMap(f, 1) ≡ concatMap(f)` (concurrency 1
+> is sequential) is proven in
+> [`examples/src/module-06-schedulers/scheduler-behavior.test.ts`](https://github.com/hansschenker/rxjs-deep-dive-kiro/blob/main/examples/src/module-06-schedulers/scheduler-behavior.test.ts),
+> which also verifies the concurrency-semaphore behavior and the queue/asap execution
+> contexts. The exact semantics of `observeOn`/`subscribeOn` remain unverified here —
+> confirm against rxjs.dev for your version.
 
 ---
 
