@@ -22,6 +22,8 @@ examples/
     ├── module-01-lineage/
     │   ├── pull-vs-push.ts          # runnable demo
     │   └── pull-vs-push.test.ts     # verified behavior
+    ├── module-02-domain-invariance/
+    │   └── functor-containers.test.ts # map as one Functor over Array/Promise/Observable
     ├── module-03-operator-algebra/
     │   ├── functor-laws.test.ts     # map identity + composition (fusion)
     │   ├── filter-laws.test.ts      # filter identity, annihilation, fusion
@@ -31,9 +33,18 @@ examples/
     │   └── algebra-laws.test.ts     # the "key laws to remember" table
     ├── module-04-time-algebra/
     │   └── time-operators.test.ts   # delay / debounceTime / throttleTime
+    ├── module-05-mealy-machines/
+    │   └── machine-traces.test.ts   # scan/distinctUntilChanged/take traces + |Q| classes
+    ├── module-06-schedulers/
+    │   └── scheduler-behavior.test.ts # mergeMap concurrency, queue/asap execution
+    ├── module-07-subjects/
+    │   └── subjects.test.ts         # unicast vs multicast, 4 variants, terminal states
     └── module-08-multicasting/
         └── subject-connectors.test.ts  # behavior follows the Subject
 ```
+
+All 8 modules are now covered. Continuous integration runs this suite on every
+push/PR that touches `examples/` — see `.github/workflows/examples-ci.yml`.
 
 Each test file names the exact course module and section it verifies, so you can read a
 claim in the docs and jump straight to the test that proves it.

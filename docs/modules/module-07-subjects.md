@@ -201,6 +201,11 @@ Promise-like: one result, delivered when the work finishes.
 
 ---
 
+> ✅ **Verified** against `rxjs@7.8.2`: unicast-vs-multicast, the "one execution → N
+> pipelines" fork, all four variants' replay behavior, the terminal `error`/`complete`
+> states, and `asObservable()` encapsulation are asserted in
+> [`examples/src/module-07-subjects/subjects.test.ts`](https://github.com/hansschenker/rxjs-deep-dive-kiro/blob/main/examples/src/module-07-subjects/subjects.test.ts).
+
 ## Step 7: Subjects power the multicasting operators
 
 The multicasting operators from Module 8 are *built on* these variants:

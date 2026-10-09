@@ -200,11 +200,15 @@ Operators that merge *multiple* Observables are the stream analogues of set oper
 A: --1----2----3|
 B: ----a----b----c|
 
-merge:         --1--a-2--b-3--c|        (union, time-ordered)
+merge:         --1-a--2-b--3-c|         (union, time-ordered)
 zip:           ----1a---2b---3c|        (index pairs: 1&a, 2&b, 3&c)
-combineLatest: ----1a-2a-2b-3b-3c|      (latest-of-each on every tick)
-concat:        --1----2----3|a--b--c|   (A then B - only if A completes)
+combineLatest: ----p--q-r--s-t|         (p=1a q=2a r=2b s=3b t=3c)
+concat:        --1----2----3---a--b--c| (A then B - only if A completes)
 ```
+
+> ✅ **Verified** against `rxjs@7.8.2` via the TestScheduler. The exact emission
+> frames above are asserted in
+> [`examples/src/module-03-operator-algebra/combination.test.ts`](https://github.com/hansschenker/rxjs-deep-dive-kiro/blob/main/examples/src/module-03-operator-algebra/combination.test.ts).
 
 Set-operation framing: `merge` is **union** (A ∪ B); `zip` and `combineLatest` are flavors of **intersection / cartesian product** (A ∩ B / A × B - pairing values from both sides).
 
@@ -281,7 +285,16 @@ map/filter commutativity:  map(f) then filter(p)  ≈  filter(x => p(f(x))) then
                            (holds only when f is injective / p is adjusted accordingly - use care)
 ```
 
-> ⚠️ Verify these equivalences against the current rxjs.dev docs and your RxJS version before relying on them in teaching material; subtle edge cases (empty streams, error propagation, scheduler effects) can break naive rewrites.
+> ✅ **Verified** against `rxjs@7.8.2`: the first six equivalences above (concat
+> associativity, merge identity, both Functor laws, filter fusion, and the
+> `switchMap` collapse) are proven by marble tests in
+> [`examples/src/module-03-operator-algebra/`](https://github.com/hansschenker/rxjs-deep-dive-kiro/tree/main/examples/src/module-03-operator-algebra)
+> (`algebra-laws.test.ts`, `functor-laws.test.ts`, `filter-laws.test.ts`).
+>
+> ⚠️ The last entry — **`map`/`filter` commutativity** — is *not* verified and holds
+> only under the stated injectivity condition. Verify any such rewrite against the
+> current rxjs.dev docs and your RxJS version; subtle edge cases (empty streams,
+> error propagation, scheduler effects) can break naive rewrites.
 
 ---
 
