@@ -47,6 +47,22 @@ The modules build on each other. Early modules establish the **lineage** and the
 | 7 | [Subjects: the Fork in the Dataflow](./docs/modules/module-07-subjects.md) | Observer + Observable, the multicast hinge |
 | 8 | [Multicasting = Subject + Lifecycle](./docs/modules/module-08-multicasting.md) | Every multicast operator is a Subject plus a lifecycle policy |
 
+## Runnable examples & law verification
+
+The [`examples/`](./examples/) directory turns the course's conceptual claims into
+**executable, verified code**. It is a self-contained `rxjs` + `vitest` project whose
+marble tests prove the algebraic laws and operator equivalences against a pinned RxJS
+version — directly discharging the "⚠️ Verify before teaching" caveats above.
+
+```bash
+cd examples
+npm install
+npm test        # run the law-verification suite
+```
+
+See [`examples/README.md`](./examples/README.md) for the full map of which test file
+verifies which module and section.
+
 ## Running the docs site
 
 This repo doubles as a [VitePress](https://vitepress.dev) documentation site. The 8 modules live under `docs/modules/`. Requires **Node 18+**.
